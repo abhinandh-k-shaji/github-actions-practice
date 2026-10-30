@@ -1,0 +1,49 @@
+name: My First GitHub Actions
+
+# Trigger the workflow whenever code is pushed
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  test:
+    name: HTML File Testing
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Display Welcome Message
+        run: echo "Welcome to GitHub Actions!"
+
+      - name: Display Current Date
+        run: date
+
+      - name: Display Working Directory
+        run: pwd
+
+      - name: List Project Files
+        run: ls -la
+
+      - name: Check HTML File
+        run: |
+          if [ -f index.html ]; then
+            echo "index.html exists"
+          else
+            echo "index.html not found"
+            exit 1
+          fi
+
+      - name: Display HTML Content
+        run: cat index.html
+
+      - name: Workflow Completed
+        run: echo "GitHub Actions execution completed successfully!"
